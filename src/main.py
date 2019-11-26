@@ -46,6 +46,10 @@ def code_cleanup(in_dir, out_dir):
         else:
             os.remove(f)
 
+    allText = ''.join([open(f, 'r').read() for f in walk_dir(out_dir)])
+
+    open(out_dir + os.path.sep + 'all', 'w').write(allText)
+
 
 def walk_dir(dir):
     all = []
@@ -58,18 +62,16 @@ def walk_dir(dir):
 
 
 if __name__ == '__main__':
-    print('code cleaner! 删除注释和空行！')
+    print('code cleaner! welcome')
     print(len(sys.argv))
     # if (len(sys.argv)==2) and os.path.isdir(sys.argv[1]):
     #     target = sys.argv[1]
     #     code_cleanup(target, './cleanUp')
     # else:
     #     print("usage: %s [target_dir]" % sys.argv[0])
-    input_dir = './target'
-    output_dir = './cleanUp'
+    input_dir = 'target'
+    output_dir = 'cleanUp'
 
     code_cleanup(input_dir, output_dir)
 
-    allText = ''.join([open(f, 'r').read() for f in walk_dir('./cleanUp')])
 
-    open(output_dir + os.path.sep + 'all', 'w').write(allText)
