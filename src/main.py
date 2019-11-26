@@ -12,7 +12,6 @@ def filter_file_content_2(file_path):
 
 
 def filter_file_content_1(file_path):
-
     map_func = [
         lambda s: re.sub(r'^import .*$', '', s),  # package
         lambda s: re.sub(r'^package .*$', '', s),  # import
@@ -35,7 +34,6 @@ def clean_file(file_path):
 
 
 def code_cleanup(in_dir, out_dir):
-    print(os.getcwd())
     if os.path.isdir(out_dir):
         shutil.rmtree(out_dir)
 
@@ -50,7 +48,6 @@ def code_cleanup(in_dir, out_dir):
 
 
 def walk_dir(dir):
-
     all = []
     for fpath, dirname, fnames in os.walk(dir):
         if len(fnames) != 0:
@@ -68,9 +65,11 @@ if __name__ == '__main__':
     #     code_cleanup(target, './cleanUp')
     # else:
     #     print("usage: %s [target_dir]" % sys.argv[0])
-    code_cleanup('./target', './cleanUp')
+    input_dir = './target'
+    output_dir = './cleanUp'
+
+    code_cleanup(input_dir, output_dir)
 
     allText = ''.join([open(f, 'r').read() for f in walk_dir('./cleanUp')])
 
-    open('./all', 'w').write(allText)
-
+    open(output_dir + os.path.sep + 'all', 'w').write(allText)
